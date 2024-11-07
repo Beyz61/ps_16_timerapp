@@ -22,19 +22,27 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
       setState(() {
         seconds ++;
       });
-    }
-    
+    });
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Timer gestarte!")
+      ),
     );
   }
 
 void stopStopwatch (){
   timer.cancel();
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Timer Stop!")
+      ),
+  );
 }
 
-void resetStopwatch(){
-  setState(() {
+Future <void> resetStopwatch() async{                                   
+   await Future.delayed(const Duration(seconds: 2));
+   setState(() {
     seconds = 0;
   });
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Timer beendet!")
+      ),
+  );
 }
 
 
@@ -42,10 +50,11 @@ void resetStopwatch(){
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+    backgroundColor: const Color.fromARGB(255, 147, 181, 209),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 7, 46, 77), 
         title: const Text("Stopwatch",
-        style: TextStyle(color: Colors.white),),),
+        style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w700),),),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Text(
@@ -60,15 +69,18 @@ void resetStopwatch(){
           children: [
             StopwatchButton(
             onTap: startStopwatch,
-            buttonName: "Start"
+            buttonName: "Start",
+            color: Colors.grey,
             ),
             StopwatchButton(
             onTap: stopStopwatch, 
-            buttonName: "Stop"
+            buttonName: "Stop",
+            color: Colors.red,
             ),
             StopwatchButton(
             onTap: resetStopwatch, 
-            buttonName: "Clear"
+            buttonName: "Clear",
+            color: Colors.blueAccent,
             ),
           ],
         ),
