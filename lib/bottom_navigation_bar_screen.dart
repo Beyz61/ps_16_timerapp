@@ -27,15 +27,22 @@ late List <Widget> widgets;
   Widget build(BuildContext context) {
     return Scaffold( 
       bottomNavigationBar: NavigationBar( 
+       backgroundColor: const Color.fromARGB(255, 118, 162, 201),
         selectedIndex: currentIndex,
         onDestinationSelected: (index){
           currentIndex = index;
           setState(() {
           });
         },
-        destinations: const [
-        NavigationDestination(icon: Icon(Icons.alarm),label: "Stopwatch"),
-        NavigationDestination(icon: Icon(Icons.timer),label: "Timer"),
+        destinations: [
+        NavigationDestination(icon: Icon(Icons.alarm,
+        color: currentIndex == 1? const Color.fromARGB(255, 4, 25, 53): 
+        const Color.fromARGB(252, 4, 25, 53)),
+        label: "Stopwatch"),
+        NavigationDestination(icon: Icon(Icons.timer, 
+        color: currentIndex == 1? const Color.fromARGB(255, 23, 16, 57): 
+        const Color.fromARGB(255, 4, 25, 53)),
+        label: "Timer"),
       ],
     ),
       body: widgets[currentIndex],
